@@ -48,50 +48,36 @@ class _MessageInputFieldState extends State<MessageInputField> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(30),
             child: Container(
-              height: 56,
               decoration: BoxDecoration(
                   color: AppColors.white,
                   border: Border.all(color: AppColors.athensGray),
                   borderRadius: const BorderRadius.all(
                     Radius.circular(30),
                   )),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        left: 22,
-                      ),
-                      child: TextField(
-                        onSubmitted: (value) {
-                          if (value.isEmpty) {
-                            return;
-                          }
-                          widget.onMessageSend(message: value);
-                          _textEditingController.clear();
-                        },
-                        controller: _textEditingController,
-                        decoration: InputDecoration(
-                            hintStyle: Theme.of(context)
-                                .textTheme
-                                .titleLarge!
-                                .copyWith(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w400,
-                                  color: AppColors.cadetGrey,
-                                ),
-                            border: InputBorder.none,
-                            hintText: 'Напишите ваше сообщение'),
-                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.cadetGrey,
-                            ),
-                      ),
-                    ),
+              child: TextField(
+                textAlignVertical: TextAlignVertical.center,
+                onSubmitted: (value) {
+                  if (value.isEmpty) {
+                    return;
+                  }
+                  widget.onMessageSend(message: value);
+                  _textEditingController.clear();
+                },
+                controller: _textEditingController,
+                decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.only(
+                    left: 22,
+                    top: 20,
+                    bottom: 20,
                   ),
-                  SendMessageButton(
+                  hintStyle: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.cadetGrey,
+                      ),
+                  border: InputBorder.none,
+                  hintText: 'Напишите ваше сообщение',
+                  suffixIcon: SendMessageButton(
                     onPressed: () {
                       if (_textEditingController.text.isEmpty) {
                         return;
@@ -102,7 +88,12 @@ class _MessageInputFieldState extends State<MessageInputField> {
                       _textEditingController.clear();
                     },
                   ),
-                ],
+                ),
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.cadetGrey,
+                    ),
               ),
             ),
           ),
